@@ -51,8 +51,8 @@
         function buttonClick(x)
         {
             
-             $(x.parentElement).fadeOut(800) ; 
-            
+             $(x.parentElement).fadeOut(800 , function(){$(".loading-div").fadeIn(800) ; }) ; 
+             
 
             switch(x.innerHTML)
                 {
@@ -63,7 +63,11 @@
                         break ; 
                         
                     case "Notes":
-                           $(".Notes-div").fadeIn(800) ; 
+                        $.post("script/php/notes.php" , "" , function(response , state , xc){
+                            $(".Notes-div").
+                            
+                        }) ;
+                          
                         break ; 
                         
                     case "Agenda":

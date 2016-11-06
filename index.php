@@ -73,7 +73,7 @@ $conn = $conx->startConnection("librarydb") ;
                         break ; 
                         
                     case "Notes":
-                           alert("avs")
+                           
                            $(".loading-div").fadeIn(800) ; 
                         break ; 
                         
