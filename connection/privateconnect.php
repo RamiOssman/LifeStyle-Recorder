@@ -18,9 +18,9 @@ public $connectDetail = Array
 ,
 "userAgentName" => "root"
 ,
-"PpassId" => "gkI5osEL"
+"PpassId" => ""
 ,
-"DBName" => "librarydb"
+"DBName" => "LSR"
 ,
 "ServerDetail" => "Apache 8.1"
 ,
@@ -44,7 +44,7 @@ class callSql extends connectAt
        
 
 // Create connection
-$conn = new mysqli($this->connectDetail['userServerName'] , $this->connectDetail['userAgentName'] ,$this->connectDetail['PpassId'] , $DBname );
+$conn = new mysqli($this->connectDetail['userServerName'] , $this->connectDetail['userAgentName'] ,$this->connectDetail['PpassId'] ,"LSR" );
 
 // Check connection
 if ($conn->connect_error) {

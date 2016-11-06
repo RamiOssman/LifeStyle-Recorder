@@ -73,9 +73,14 @@ $conn = $conx->startConnection("librarydb") ;
                         break ; 
                         
                     case "Notes":
-                           
-                           $(".loading-div").fadeIn(800) ; 
+                        
+                        $.post("script/php/notes.php" , "" , function(response , state , xc){ 
+                        
+                        }) ;
+                          
+                               
                         break ; 
+                        
                         
                     case "Agenda":
                         

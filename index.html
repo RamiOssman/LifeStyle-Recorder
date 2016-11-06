@@ -1,12 +1,18 @@
+
 <html>
 <header>
     <title>LifeStyle Recorder</title>
-        <link href="style/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="style/css.css" rel="stylesheet" type="text/css" />
-    <script src="script/jquery.js" >
+       <script src="script/jquery.js" >
     
     </script>
+        <link href="style/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="style/css.css" rel="stylesheet" type="text/css" />
+ 
     <script src="script/bootstrap.js">
+    
+    </script>
+    <script src="script/functions.js">
+    
     
     </script>
  
@@ -26,7 +32,7 @@
 <button type="button" class="btn btn-primary" onclick="buttonClick(this)">To Do</button>
 
 <!-- Indicates a successful or positive action -->
-<button  onclick="buttonClick(this)" type="button" class="btn btn-success">Notes</button>
+<button  onclick="buttonClick(this)" type="button" id="notesButton" class="btn btn-success">Notes</button>
 
 <!-- Contextual button for informational alert messages -->
 <button   onclick="buttonClick(this)" type="button" class="btn btn-info">Agenda</button>
@@ -42,7 +48,7 @@
         <div style="display:none" class="Todo-div">
             
         </div>
-        <div style="display:visible" class="Notes-div">
+        <div style="display:none" class="Notes-div">
             
         </div>
         
@@ -51,8 +57,10 @@
         function buttonClick(x)
         {
             
-             $(x.parentElement).fadeOut(800 , function(){$(".loading-div").fadeIn(800) ; }) ; 
-             
+             $(x.parentElement).fadeOut(400) ;
+            
+               $(".loading-div").fadeIn(400) ; 
+          
 
             switch(x.innerHTML)
                 {
@@ -63,12 +71,19 @@
                         break ; 
                         
                     case "Notes":
-                        $.post("script/php/notes.php" , "" , function(response , state , xc){
-                            $(".Notes-div").
+                        
+                        $.post("script/php/notes.php" , "" , function(response , state , xc){ 
+                             $(".Notes-div").html(response) ; 
+                            
+                            $(".loading-div").fadeOut(400 , function(){  $(".Notes-div").fadeIn(800) ; }) ; 
+                          
+                       
                             
                         }) ;
                           
+                               
                         break ; 
+                        
                         
                     case "Agenda":
                         
