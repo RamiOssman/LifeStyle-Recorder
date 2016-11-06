@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans+Condensed:300');
+html,body
+{
+    background-color:#6f5499 ; 
+    
+    
+    
+}
+.TitleHeader
+{
+      
+    
+}
+h1.title
+{
+
+font-family: 'Open Sans Condensed', sans-serif;
+    
+    color:white ; 
+    word-spacing: 10px ; 
+    letter-spacing: 8px ; 
+    text-align: center ; 
+    padding-top: 50px ;
+}
+div.loading-div , div.actions-div , div.Notes-div , div.Todo-div
+{
+     
+    width:100%; 
+   padding-top: 100px ;
+  
+}
+img.loading-img
+{
+    display: block ; 
+    width: 5%; ; 
+    margin-left: auto ; 
+    margin-right:auto ; 
+
+    
+}
+.actions-div > .btn  
+{
+    display: block ; 
+    width: 80%; 
+    height: 60px ; 
+    margin:40px ;
+    margin-left: auto ; 
+    margin-right:auto ; 
+    font-family: 'Indie Flower', cursive;
+    font-size: 35px ; 
+    
+}
