@@ -57,11 +57,8 @@
         function buttonClick(x)
         {
             
-             $(x.parentElement).fadeOut(400) ;
-            
-               $(".loading-div").fadeIn(400) ; 
-          
-
+            ShowLoading();
+            setInterval(500) ; 
             switch(x.innerHTML)
                 {
                     case "To Do":
@@ -72,11 +69,12 @@
                         
                     case "Notes":
                         
+                     
+                        
                         $.post("script/php/notes.php" , "" , function(response , state , xc){ 
                              $(".Notes-div").html(response) ; 
-                            
-                            $(".loading-div").fadeOut(400 , function(){  $(".Notes-div").fadeIn(800) ; }) ; 
-                          
+                      
+                          HideLoading( function(){ $(".Notes-div").fadeIn(800) ; }) ;
                        
                             
                         }) ;
@@ -97,7 +95,10 @@
                     case "Recovery Work":
                         
                         break;
-                    default: return 0 ; break ;    
+                    default: 
+                        HideLoading( function(){ $(".actions-div").fadeIn(800) ; }) ;
+                        
+                        break ;    
                     
                  
                     
@@ -108,11 +109,44 @@
         
         
         }
+        function shownDiv(){
+            
+            var parentEl = document.getElementsByClassName("TitleHeader")[0] ; 
+            var returnShownDivs = Array() ; 
+            
+         for(x = 0 ; x < parentEl.childElementCount ; x++){
+             Chd = parentEl.children[x] ;
+               if(Chd.tagName!="DIV")
+                    continue ;
+                if(Chd.style.display=="none")
+                    continue ; 
+                   
+                returnShownDivs[returnShownDivs.length] = Chd ; 
+                
+                
+            }
+            
+            return returnShownDivs ;
+            
+            
+        }
         
+        function ShowLoading(){
+            
+            var ShownDiv = shownDiv()[0] ; 
+            if(ShownDiv==undefined)
+                return false; 
+            $(ShownDiv).fadeOut(600 , function(){ $(".loading-div").fadeIn(600)}) ;
+            
+            
+        }   
+        function HideLoading(finishFunction){
+            
+            setTimeout(function(){$(".loading-div").fadeOut(400 , finishFunction)} ,1000);  
+            
+        }
         
-        
-        
-        
+       
         </script>
     
     </body>

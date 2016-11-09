@@ -6,6 +6,16 @@ $conx = new callSql ;
 $conn = $conx->startConnection("librarydb") ; 
 
 
+if(isset($_POST['remove'])){
+    
+    $removeId = $_POST['remove'] ; 
+    $query = "DELETE FROM `Notes` WHERE `NoteId` = $removeId" ; 
+    $result = $conn->query($query) ; 
+    if($result===false)
+        echo "error" ; 
+    
+    exit() ; 
+}
 
 
 
@@ -34,7 +44,8 @@ if(isset($_POST['type'])){
     $query = "INSERT INTO `Notes` (`NoteTypeId`,`NoteString` , `NoteValue`) VALUES('$IDTYPE' , '$Str' , '$Vlue')" ; 
     
     $result = $conn->query($query) ; 
-    
+    if($result===false)
+        echo "error" ; 
     exit() ; 
 }
 
@@ -49,6 +60,7 @@ $result = $conn->query($query) ;
         <th style="font-family: 'Quicksand', sans-serif;">Note Type</th>
         <th style="font-family: 'Quicksand', sans-serif;">Note String</th>
         <th style="font-family: 'Quicksand', sans-serif;">Note Value</th>
+        <th style="font-family: 'Quicksand', sans-serif;">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -65,9 +77,9 @@ $result = $conn->query($query) ;
     ?>
               <tr class="success">
         <td style="background-color:#6f5499; color:white; font-family: 'Quicksand', sans-serif;"> <?php  echo $NoteType ;  ?></td>
-        <td style="background-color:#6f5499; color:white; font-family: 'Quicksand', sans-serif;"> <?php  echo $NoteType ;  ?></td>
         <td style="background-color:#6f5499; color:white; font-family: 'Quicksand', sans-serif;">  <?php echo $row_new['NoteString'] ;  ?></td>
         <td style="background-color:#6f5499 ; color:white; font-family: 'Quicksand', sans-serif;"> <?php echo $row_new['NoteValue'] ;  ?></td>
+        <td style="background-color:#6f5499 ; color:white; font-family: 'Quicksand', sans-serif;"> <button type="button" class="btn btn-danger" style="font-family: 'Quicksand', sans-serif;" onclick="deleteNote(<?php echo  $row_new['NoteId']; ?>, function(){buttonClick(document.getElementById('notesButton'))})">Delete Field</button> </td>          
       </tr>
         
         <?php 
@@ -82,9 +94,12 @@ $result = $conn->query($query) ;
         <td style="background-color:#6f5499">  <input class="form-control" id="noteType" type="text" name="NOTETYPE"></td>
         <td style="background-color:#6f5499">  <input class="form-control" id="noteString" type="text" name="NOTESTRING"></td>
         <td style="background-color:#6f5499">  <input class="form-control" id="noteValue" type="text" name="NOTEVALUE"></td>
+         <td style="background-color:#6f5499">    <button type="button" class="btn btn-success" style="font-family: 'Quicksand', sans-serif;" onclick="submitNote(function(a , b, c){buttonClick(document.getElementById('notesButton'))})">Submit</button></td>
       </tr>
           <tr class="success">
-        <td style="background-color:#6f5499">    <button type="button" class="btn btn-success" style="font-family: 'Quicksand', sans-serif;" onclick="submitNote(function(a , b, c){buttonClick(document.getElementById('notesButton'))})">Submit</button></td>
+        <td style="background-color:#6f5499">    
+<button type="button" class="btn btn-primary" onclick="buttonClick(this)">Go Back</button>
+            </td>
       
       </tr>
     
