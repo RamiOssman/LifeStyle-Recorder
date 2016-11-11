@@ -1,27 +1,9 @@
 <?php
 
-require_once('../../connection/privateconnect.php') ; 
-require_once('NRef.php') ; 
+require_once('../../connection/agenda.php') ; 
 
-date_default_timezone_set('Europe/Paris');
+$todayAgenda 
 
-$conx = new callSql ; 
-
-$conn = $conx->startConnection("librarydb") ; 
-
-$date = array(date("d") , date("m") , date("y")) ; 
-
-$dateRequest = new timeRef ; 
-
-
-$timeRef =  $dateRequest->getTimeRefId($date[0] , $date[1] , $date[2]) ; 
-
-$query = "SELECT * FROM `AgendaLog` WHERE `TRefId` = $timeRef" ; 
-
-$result = $conn->query($query) ;
-
-while($row = $result->fetch_assoc())
-{
     
     ?>
 <div class="container">
@@ -38,9 +20,6 @@ while($row = $result->fetch_assoc())
 
 <?php
     
-    
-    
-}
 
 
 

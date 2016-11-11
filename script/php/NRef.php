@@ -1,6 +1,6 @@
 <?php
 
- require_once('../../connection/privateconnect.php') ; 
+ require_once('../../connection/privateconnect.php') ;
 
 class NoteRef
 {
@@ -15,7 +15,7 @@ class NoteRef
         
            
             $conx =   new callSql ; 
-            $conn = $conx->startConnection("librarydb") ; 
+            $conn = $conx->startConnection("") ; 
         
         
         $res   = array() ;
@@ -41,7 +41,7 @@ class NoteRef
         
            
             $conx =   new callSql ; 
-            $conn = $conx->startConnection("librarydb") ; 
+            $conn = $conx->startConnection("") ; 
         
         
         $res   = array() ;
@@ -60,6 +60,46 @@ class NoteRef
         
         return $res ; 
         
+        
+    }
+            function getStringFromNoteId($STR_REF)
+    {
+        
+           
+            $conx =   new callSql ; 
+            $conn = $conx->startConnection("") ; 
+        
+        
+
+ 
+        $query = "SELECT * FROM `Notes` WHERE `NoteId` = '$STR_REF'" ; 
+
+        $result = $conn->query($query) ; 
+                
+        $row = $result->fetch_assoc() ; 
+         
+        return $row['NoteString'] ; 
+        
+
+        
+    }
+                function getValueFromNoteId($STR_REF)
+    {
+        
+           
+            $conx =   new callSql ; 
+            $conn = $conx->startConnection("") ; 
+        
+        
+
+ 
+        $query = "SELECT * FROM `Notes` WHERE `NoteId` = '$STR_REF'" ; 
+
+        $result = $conn->query($query) ; 
+         
+        return $row['NoteValue'] ; 
+        
+
         
     }
     
@@ -114,7 +154,7 @@ class NoteRef
         
            
             $conx =   new callSql ; 
-            $conn = $conx->startConnection("librarydb") ; 
+            $conn = $conx->startConnection("") ; 
         
     
  
@@ -122,12 +162,58 @@ class NoteRef
 
         $result = $conn->query($query) ; 
         
+        if($result===false)
+            return 1 ; 
+        
         $row = $result->fetch_assoc() ; 
         
         return $row['TRID'] ;
         
         
     }
+     
+    function getDate($refId)
+    {
+        
+        
+            $conx =   new callSql ; 
+            $conn = $conx->startConnection("") ; 
+        
+    
+ 
+        $query = "SELECT * FROM `TimeReferencal` WHERE `TRID` = '$refId' " ; 
+
+        $result = $conn->query($query) ; 
+        
+        $row = $result->fetch_assoc() ; 
+        
+        return array($row['TRDAY'] , $row['TRMONTH'] , $row['TRYEAR']) ;
+        
+        
+        
+    }
+     
+     function setDate($D , $M , $Y) {
+         
+            $conx =   new callSql ; 
+            $conn = $conx->startConnection("") ; 
+         
+         
+         $query = "SELECT * FROM `TimeReferencal` WHERE `TRDAY` = '$D' AND `TRMONTH` = '$M' AND `TRYEAR` = '$Y' " ;
+         
+         $result = $conn->query($query) ; 
+         
+         while($row=$result->fetch_assoc())
+             return $row['TRID'] ; 
+         
+         $query = "INSERT INTO `TimeReferencal` (`TRDAY` , `TRMONTH` , `TRYEAR`) VALUES ('$D' , '$M' , '$Y')" ; 
+         
+            $result = $conn->query($query) ;
+         
+            return $conn->insert_id ;  
+         
+         
+     }
  }
         
 
