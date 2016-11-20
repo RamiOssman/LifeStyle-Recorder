@@ -5,12 +5,7 @@
 class NoteRef
 {
 
- 
-
- 
-
-    
-    function getValuesFromString($STR_REF)
+    function getValueFromString($STR_REF)
     {
         
            
@@ -23,16 +18,11 @@ class NoteRef
         $query = "SELECT * FROM `Notes` WHERE `NoteString` = '$STR_REF'" ; 
 
         $result = $conn->query($query) ; 
-        
-        $at = 0 ;
-             
-        while($row = $result->fetch_assoc()){
-            
-            $res[$at] = $row['NoteValue'] ; 
-            $at++ ; 
-        }
-        
-        return $res ; 
+
+        $row = $result->fetch_assoc() ; 
+
+        return $row['NoteValue'] ; 
+      
         
         
     }
@@ -83,7 +73,7 @@ class NoteRef
 
         
     }
-                function getValueFromNoteId($STR_REF)
+    function getValueFromNoteId($STR_REF)
     {
         
            
@@ -96,6 +86,8 @@ class NoteRef
         $query = "SELECT * FROM `Notes` WHERE `NoteId` = '$STR_REF'" ; 
 
         $result = $conn->query($query) ; 
+                    
+        $row = $result->fetch_assoc() ; 
          
         return $row['NoteValue'] ; 
         
@@ -111,7 +103,7 @@ class NoteRef
         
         $res   = array() ;
  
-          $query = "SELECT * FROM `NoteType` WHERE `NoteTypeString` = '$TYPE_REF'" ; 
+        $query = "SELECT * FROM `NoteType` WHERE `NoteTypeString` = '$TYPE_REF'" ; 
 
         $result = $conn->query($query) ;
         

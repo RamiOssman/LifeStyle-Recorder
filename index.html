@@ -35,7 +35,7 @@
 <button  onclick="buttonClick(this)" type="button" id="notesButton" class="btn btn-success">Notes</button>
 
 <!-- Contextual button for informational alert messages -->
-<button   onclick="buttonClick(this)" type="button" class="btn btn-info">Agenda</button>
+<button   onclick="buttonClick(this)" type="button" id="agendaButton" class="btn btn-info">Agenda</button>
 
 <!-- Indicates caution should be taken with this action -->
 <button  onclick="buttonClick(this)" type="button" class="btn btn-warning">HS Statistic</button>
@@ -51,7 +51,9 @@
         <div style="display:none" class="Notes-div">
             
         </div>
-        
+        <div style="display:none" class="Agenda-div">
+            
+        </div>
         </div>
     <script>
         function buttonClick(x)
@@ -85,6 +87,15 @@
                         
                     case "Agenda":
                         
+                                                
+                        $.post("script/php/Agenda.php" , "" , function(response , state , xc){ 
+                             $(".Agenda-div").html(response) ; 
+                      
+                          HideLoading( function(){ $(".Agenda-div").fadeIn(800) ; }) ;
+                       
+                            
+                        }) ;
+                          
                         
                         break;
                         
@@ -148,7 +159,7 @@
         
        
         </script>
-    
+     
     </body>
     
 </html>
