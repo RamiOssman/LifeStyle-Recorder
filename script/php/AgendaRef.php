@@ -23,16 +23,31 @@ $result = $conn->query($query) ;
 if($result===false)
     return array() ; 
         
-$returnArray = array() ; 
+        $returnArray = array() ; 
         
 
-while($row = $result->fetch_assoc())
-       $returnArray[sizeof($returnArray)] = $row ;
-       return $returnArray ; 
+        while($row = $result->fetch_assoc())
+            $returnArray[sizeof($returnArray)] = $row ;
+        
+        return $returnArray ; 
         
     }
     
-    
+    function ChargeWorkOfTheDay($date){ //[0] =>day, [1] => month, [2] => year
+        
+        $Work = $this->toDo($date) ;
+       
+        $ChargeIndex = 0 ; 
+        
+        foreach($Work as $tWork)
+            $ChargeIndex+=$tWork['Difficulity'] ;  
+   
+        
+        return $ChargeIndex ; 
+        
+        
+        
+    }
     
         function toDoById($id){ //[0] =>day, [1] => month, [2] => year
         
@@ -159,6 +174,76 @@ $row = $result->fetch_assoc() ;
         
         
     }
+    function importanceCalculator($workType , $workTitle , $limitDay){
+        
+        /*
+        Exemple: 
+        
+        workTitle:SCIENCES_PHYSIQUE_CHIMIE
+        workType:REVISION_DST
+        limitDay:4
+
+        */
+        
+        $importanceIndex = 0  ;
+        
+        $notes = new NoteRef ;
+        
+        ////////CONDITION A
+        
+        /////   PRIORITY A
+        $typesPA = $notes->getStringsFromType("WORK_TYPE_PRIORITY_A") ; 
+        foreach($typesPA as $typeA)
+        if($typeA == $workType)
+            $importanceIndex+=3 ; 
+      
+        /////   PRIORITY B
+        $typesPA = $notes->getStringsFromType("WORK_TYPE_PRIORITY_B") ; 
+        foreach($typesPA as $typeA)
+        if($typeA == $workType)
+            $importanceIndex+=2 ; 
+        
+        /////   PRIORITY C
+        $typesPA = $notes->getStringsFromType("WORK_TYPE_PRIORITY_C") ; 
+        foreach($typesPA as $typeA)
+        if($typeA == $workType)
+            $importanceIndex+=1 ; 
+      
+            
+        ////////CONDITION B
+        
+        /////   PRIORITY A
+        $typesPA = $notes->getStringsFromType("WORK_MATERIAL_PRIORITY_A") ; 
+        foreach($typesPA as $typeA)
+        if($typeA == $workTitle)
+            $importanceIndex+=3 ; 
+      
+        /////   PRIORITY B
+        $typesPA = $notes->getStringsFromType("WORK_MATERIAL_PRIORITY_B") ; 
+        foreach($typesPA as $typeA)
+        if($typeA == $workTitle)
+            $importanceIndex+=2 ; 
+        
+        /////   PRIORITY C
+        $typesPA = $notes->getStringsFromType("WORK_MATERIAL_PRIORITY_C") ; 
+        foreach($typesPA as $typeA)
+        if($typeA == $workTitle)
+            $importanceIndex+=1 ;         
+        
+        ////////CONDITION C
+        
+        if($limitDay < 3)
+            $importanceIndex+=4 ; 
+        elseif($limitDay < 5)
+            $importanceIndex+=2 ; 
+        elseif($limitDay < 8)
+            $importanceIndex+=1 ;         
+        
+        return $importanceIndex ; 
+        
+        
+    }
+
 
        
     

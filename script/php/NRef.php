@@ -73,6 +73,7 @@ class NoteRef
 
         
     }
+                
     function getValueFromNoteId($STR_REF)
     {
         
@@ -94,6 +95,49 @@ class NoteRef
 
         
     }
+        function getNoteTypeIdFromNoteType($STR_REF)
+    {
+        
+           
+            $conx =   new callSql ; 
+            $conn = $conx->startConnection("") ; 
+        
+        
+
+ 
+        $query = "SELECT * FROM `NoteType` WHERE `NoteTypeString` = '$STR_REF'" ; 
+
+        $result = $conn->query($query) ; 
+                    
+        $row = $result->fetch_assoc() ; 
+         
+        return $row['NoteTypeId'] ; 
+        
+
+        
+    }
+            function getNoteIdFromNoteString($STR_REF)
+    {
+        
+           
+            $conx =   new callSql ; 
+            $conn = $conx->startConnection("") ; 
+        
+        
+
+ 
+        $query = "SELECT * FROM `Notes` WHERE `NoteString` = '$STR_REF'" ; 
+
+        $result = $conn->query($query) ; 
+                    
+        $row = $result->fetch_assoc() ; 
+         
+        return $row['NoteTypeId'] ; 
+        
+
+        
+    }
+            
     
     function getStringsFromType($TYPE_REF)
     {
@@ -125,7 +169,9 @@ class NoteRef
         
         return $res ; 
         
-    }
+    } 
+    
+
 
 
     

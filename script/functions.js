@@ -94,11 +94,19 @@ function addWork(){
     }
     $("#newAgenda").modal("toggle") ; 
     
-    ShowLoading() ; 
+   // ShowLoading() ; 
     
     var data = "workTitle="+workTitle+"&workType="+workType+"&limitDay="+limitDay+"&difficulity="+difficulity+"&description="+description ; 
     
     $.post("script/php/createWork.php" ,data , function(){
+       
+    } ) ;     
+
+    
+}
+
+function addlate(){
+    
         
        HideLoading(function(){
            
@@ -106,10 +114,6 @@ function addWork(){
            
        }) 
         
-       
-    } ) ;     
-
-    
 }
 
 
