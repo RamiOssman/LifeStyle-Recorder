@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans+Condensed:300');
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 html,body
 {
     background-color:#6f5499 ; 
@@ -48,5 +49,6 @@ img.loading-img
     margin-right:auto ; 
     font-family: 'Indie Flower', cursive;
     font-size: 35px ; 
+    
     
 }
